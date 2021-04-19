@@ -48,9 +48,9 @@ class RegistrationFormType extends AbstractType
                     new Email([
                         'message' => "L'adresse email n'est pas valide."
                     ]),
-                    new Unique([
-                        'message' => "L'adresse email est deja utilisée."
-                    ])
+                    // new Unique([
+                    //     'message' => "L'adresse email est deja utilisée."
+                    // ])
                 ]
             ])
 
