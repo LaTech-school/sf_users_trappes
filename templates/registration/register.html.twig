@@ -14,19 +14,27 @@
             
             <h1>Register</h1>
             
+            {# Debut du formulaire #}
             {{ form_start(registrationForm, {
                 attr: {
                     novalidate: "novalidate"
                 }}
             ) }}
 
+
+                {# Ce bloc genere automatiquement la vue du formulaire #}
                 {{ form_row(registrationForm.email) }}
                 {{ form_row(registrationForm.plainPassword, {
                     label: 'Password'
                 }) }}
                 {{ form_row(registrationForm.agreeTerms) }}
+
+
             
+                {# Bouton du soumission #}
                 <button type="submit" class="btn">Register</button>
+
+            {# Fin du formulaire #}
             {{ form_end(registrationForm) }}
 
             <a href="{{ path('app_login') }}">Already have account</a>

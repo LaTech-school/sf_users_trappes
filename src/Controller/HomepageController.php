@@ -9,6 +9,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomepageController extends AbstractController
 {
     /**
+     * Route(
+     * "/", <----------------- Path : stie.com/
+     * name="homepage" <------ name : {{ path('homepage') }}
+     * )
+     */
+
+     
+    /**
      * @Route("/", name="homepage")
      */
     public function index(): Response

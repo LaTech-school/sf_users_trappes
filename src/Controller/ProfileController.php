@@ -9,6 +9,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends AbstractController
 {
     /**
+     * Route(
+     * "/mon-profile", <--- path : site.com/mon-profile
+     * name="profile" <---- name : <a href="{{ path('profile') }}">..
+     * )
+     */
+
+
+
+    /**
      * @Route("/profile", name="profile")
      */
     public function index(): Response
