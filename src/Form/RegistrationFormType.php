@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\GreaterThan;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -23,8 +24,10 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // definition de la liste des années
-        $years = range( date('Y')-100 , date('Y')-18 );
-        rsort($years);
+        // $years = range( date('Y')-100 , date('Y')-18 );
+        // rsort($years);
+
+        $years = range( date('Y')-18 , date('Y')-100, -1 );
 
 
         $builder
@@ -49,14 +52,6 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
 
-
-
-
-
-
-
-
-
             // Firstname
             ->add('firstname', TextType::class, [
                 'label' => "Votre prénom",
@@ -71,6 +66,9 @@ class RegistrationFormType extends AbstractType
             // Lastname
             ->add('lastname', TextType::class, [
                 'label' => "Votre NOM",
+                'label_attr' => [
+                    'class' => "col-lg-3"
+                ],
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Ceci est le placeholder du champ lastname"
@@ -80,8 +78,8 @@ class RegistrationFormType extends AbstractType
                         'message' => "Ce champ est obligatoire"
                     ])
                 ]
-                ])
-
+            ])
+            
             // Birthday
             ->add('birthday', BirthdayType::class, [
                 'label' => "Votre date de naissance",
@@ -97,21 +95,16 @@ class RegistrationFormType extends AbstractType
                 // Liste des options du champ <select> "Year"
                 'years' => $years,
 
-
-
                 'constraints' => [
                     new NotBlank([
                         'message' => "Ce champ est obligatoire"
-                    ])
+                    ]),
+                    // new GreaterThan([
+                    //     'value' => new \DateTime('now'),
+                    //     'message' => "T'es trop jeune mon chaton !!!"
+                    // ])
                 ]
             ])
-
-
-
-
-
-
-
 
             // Agree Terms
             ->add('agreeTerms', CheckboxType::class, [
