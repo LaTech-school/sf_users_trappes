@@ -25,19 +25,16 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
 
-            <ul class="navbar-nav">
+            <ul class="navbar-nav  mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Accueil</a>
+                    <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
                 </li>
+            </ul>
 
+            <ul class="navbar-nav ml-auto">
 
-                {# Anonymous users #}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Inscription</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Connexion</a>
-                </li>
+            {# {% if app.user %} #}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
                 {# Authenticated users #}
                 <li class="nav-item">
@@ -46,6 +43,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Deconnexion</a>
                 </li>
+
+            {% else %}
+                    
+                {# Anonymous users #}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                </li>
+
+            {% endif %}
                 
             </ul>
 
