@@ -1,19 +1,40 @@
 security:
+
+
+    # Choix de l'algo de cryptage du mot de passe
     encoders:
         App\Entity\User:
-            algorithm: auto
+            algorithm: auto # bcrypt par defaut
+
+
+    # Definition des roles des utilisateurs
+    role_hierarchy:
+        ROLE_AUTHOR: [ROLE_USER]
+        ROLE_EDITOR: [ROLE_AUTHOR]
+        ROLE_ADMIN: [ROLE_EDITOR]
+        ROLE_DEVELOPER: ROLE_ADMIN
+
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
+
+        # Definit l'entité qui permet d'identifier un utilisateur
+        app_user_provider: # Nom du provider (libre)
             entity:
-                class: App\Entity\User
-                property: email
+                class: App\Entity\User  # Pour l'entité User
+                property: email         # On se base sur le champ email 
+        
+    
+    # Definition des pare-feu
     firewalls:
+
+        # Pare-feu "dev"
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        # pare-feu "main"
         main:
             anonymous: true
             lazy: true
@@ -24,7 +45,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: app_login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -32,6 +53,8 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
+    
+    
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
